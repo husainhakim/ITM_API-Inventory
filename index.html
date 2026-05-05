@@ -1,0 +1,811 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ITM API Inventory</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        color: #222;
+      }
+      h1 {
+        font-size: 22pt;
+        color: #1a1a2e;
+        border-bottom: 3px solid #1a1a2e;
+        padding-bottom: 8px;
+      }
+      h2 {
+        font-size: 16pt;
+        color: #16213e;
+        margin-top: 30px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 4px;
+      }
+      h3 {
+        font-size: 12pt;
+        color: #0f3460;
+        margin-top: 20px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0 24px 0;
+      }
+      th,
+      td {
+        border: 1px solid #999;
+        padding: 8px 12px;
+        text-align: left;
+        font-size: 10pt;
+      }
+      th {
+        background-color: #1a1a2e;
+        color: #fff;
+        font-weight: bold;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .method-get {
+        color: #0d7377;
+        font-weight: bold;
+      }
+      .method-post {
+        color: #e94560;
+        font-weight: bold;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 9pt;
+        font-weight: bold;
+      }
+      .badge-auth {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+      .stats-table td {
+        border: none;
+        padding: 4px 16px 4px 0;
+      }
+      .stats-table {
+        margin: 8px 0;
+      }
+      .footer {
+        margin-top: 40px;
+        font-size: 9pt;
+        color: #888;
+        border-top: 1px solid #ccc;
+        padding-top: 8px;
+      }
+      .program {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ITM API Inventory</h1>
+    <p>
+      <strong>Repository:</strong> itm-node-api &nbsp;&nbsp;|&nbsp;&nbsp;
+      <strong>Total APIs:</strong> 45 &nbsp;&nbsp;|&nbsp;&nbsp;
+      <strong>Controller:</strong> controllers/itm.js &nbsp;&nbsp;|&nbsp;&nbsp;
+      <strong>Routes defined in:</strong> server.js (lines 106-112)
+    </p>
+
+    <table class="stats-table">
+      <tr>
+        <td><strong>POST endpoints:</strong></td>
+        <td>43</td>
+        <td><strong>GET endpoints:</strong></td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><strong>Auth-protected:</strong></td>
+        <td>2</td>
+        <td><strong>Integrations:</strong></td>
+        <td>NoPaperForms API + Customer.io</td>
+      </tr>
+    </table>
+<h4>
+
+        Service API URL -
+
+        <a href="https://api.itm.edu" target="_blank" rel="noopener noreferrer">
+
+            https://api.itm.edu
+
+        </a>
+
+    </h4>
+    
+    <!-- ======================================================== -->
+    <h2>1. Referral Management (2 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/ref</code></td>
+        <td>generateRef</td>
+        <td>
+          Generate or retrieve a referral code for a user. Creates new referral
+          record if none exists, otherwise increments counter.
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="method-get">GET</span></td>
+        <td><code>/v2/itm/isu/ref/name/:id</code></td>
+        <td>getDetailsOfRef</td>
+        <td>
+          Retrieve referral details (referrer's name) by referral ID. Returns
+          default message if not found.
+        </td>
+        <td><span class="badge badge-auth">checkAuth</span></td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>2. Engineering (ISU) Lead Submissions (5 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads</code></td>
+        <td>addLead</td>
+        <td>
+          Submit lead for
+          <span class="program">BTech Computer Science Engineering</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/mtech</code></td>
+        <td>addLeadMtech</td>
+        <td>
+          Submit lead for <span class="program">M.Tech CSE</span>. Stored in a
+          separate collection.
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="method-get">GET</span></td>
+        <td><code>/v2/itm/isu/mtech</code></td>
+        <td>getMTechLeads</td>
+        <td>Retrieve paginated list of M.Tech leads</td>
+        <td><span class="badge badge-auth">checkAuth</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/msc</code></td>
+        <td>addLeadMs</td>
+        <td>
+          Submit lead for <span class="program">MSc Computer Science</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/appliedai</code></td>
+        <td>addLeadAppliedAi</td>
+        <td>
+          Submit lead for
+          <span class="program">Applied AI Engineer</span> program. Supports
+          type field (workingProfessional or other).
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>3. Business School Lead Submissions (4 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/bba</code></td>
+        <td>addLeadBBA</td>
+        <td>Submit lead for <span class="program">BBA iConnect</span></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/mba</code></td>
+        <td>addLeadMba1</td>
+        <td>Submit lead for <span class="program">MBA iConnect</span></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/mba/v2</code></td>
+        <td>addLeadMbaV2</td>
+        <td>
+          Submit lead for <span class="program">MBA iConnect v2</span> —
+          includes callback time, stream, and specialization fields.
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/ihtem</code></td>
+        <td>addLeadihtem</td>
+        <td>
+          Submit lead for
+          <span class="program"
+            >BBA in International Hospitality &amp; Tourism Management</span
+          >
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>4. Design Institute (IDM) Lead Submissions (6 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/vfx</code></td>
+        <td>addLeadVFX</td>
+        <td>
+          Submit lead for
+          <span class="program">B.Des in Animation &amp; VFX</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/fd</code></td>
+        <td>addLeadFD</td>
+        <td>
+          Submit lead for <span class="program">B.Des in Fashion Design</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/id</code></td>
+        <td>addLeadID</td>
+        <td>
+          Submit lead for <span class="program">B.Des in Interior Design</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/vc</code></td>
+        <td>addLeadVC</td>
+        <td>
+          Submit lead for
+          <span class="program">B.Des in Visual Communication</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/ux</code></td>
+        <td>addLeadUX</td>
+        <td>Submit lead for <span class="program">B.Des in UX Design</span></td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/idm/leads/idm</code></td>
+        <td>addLeadIDM</td>
+        <td>
+          Submit lead for <span class="program">IDM common</span> — any design
+          program with referral support
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>5. Hotel Management (IHM) Lead Submissions (7 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/ihm/leads</code></td>
+        <td>addLeadihmCommon</td>
+        <td>
+          Submit lead for <span class="program">IHM common programs</span> (GHM,
+          BBAITT, BHS, BAM, ICA, DPC)
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/bhs</code></td>
+        <td>addLeadbhs</td>
+        <td>
+          Submit lead for
+          <span class="program">B.Sc. in Hospitality Studies</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/dpc</code></td>
+        <td>addLeaddpc</td>
+        <td>
+          Submit lead for
+          <span class="program">Diploma in Patisserie &amp; Confectionery</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/ica</code></td>
+        <td>addLeadica</td>
+        <td>
+          Submit lead for
+          <span class="program">BA in International Culinary Arts</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>22</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/ghm</code></td>
+        <td>addLeadghm</td>
+        <td>
+          Submit lead for
+          <span class="program">BBA in Global Hospitality Management</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>23</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/bbaitt</code></td>
+        <td>addLeadbbitt</td>
+        <td>
+          Submit lead for
+          <span class="program">BBA in Hospitality Management</span>
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>6. Health Sciences (IHS) Lead Submissions (4 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>24</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/mlt</code></td>
+        <td>addLeadmlt</td>
+        <td>
+          Submit lead for
+          <span class="program">B.Sc in Medical Laboratory Technology</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/bop</code></td>
+        <td>addLeadbop</td>
+        <td>
+          Submit lead for <span class="program">Bachelor of Optometry</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>26</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/mop</code></td>
+        <td>addLeadihsmop</td>
+        <td>
+          Submit lead for <span class="program">Master of Optometry</span>
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>27</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/ihs/common</code></td>
+        <td>addLeadIHS</td>
+        <td>
+          Submit lead for <span class="program">IHS common programs</span> (BOP,
+          MLT, MOP, MSc MLT)
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>7. Industry-Specific Academy (ISA) Lead Submissions (4 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>28</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/pgrb</code></td>
+        <td>addLeadPGRB</td>
+        <td>
+          Submit lead for <span class="program">Kotak — NextGen</span> program
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>29</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/sbp</code></td>
+        <td>addLeadSBP</td>
+        <td>
+          Submit lead for
+          <span class="program">Kotak — SKY Bankers</span> program
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>30</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/icib</code></td>
+        <td>addLeadICIB</td>
+        <td>
+          Submit lead for
+          <span class="program">ICICI Bank — PGPRM</span> program
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>31</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/axis</code></td>
+        <td>addLeadAxis</td>
+        <td>
+          Submit lead for
+          <span class="program">Axis Bank — Sales Officer</span> program
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>8. Regional Campus Lead Submissions (4 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>32</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/vug/leads/int/btech</code></td>
+        <td>addLeadintBtech</td>
+        <td>
+          Submit lead for
+          <span class="program">VUG Integrated B.Tech</span> (CS, Mechatronics,
+          Mechanical, Civil)
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>33</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/vug</code></td>
+        <td>addLeadVug</td>
+        <td>
+          Submit lead for <span class="program">VUG programs</span> (routed by
+          course keyword)
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>34</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/vug/btech/common</code></td>
+        <td>addLeadSingleFoldVug</td>
+        <td>
+          Submit lead for
+          <span class="program">VUG B.Tech common</span> (Integrated or regular
+          B.Tech)
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>35</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/ru</code></td>
+        <td>addLeadRU</td>
+        <td>
+          Submit lead for
+          <span class="program">Raipur University</span> programs (routed by
+          course keyword)
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>9. Referral-Tracked Lead Submissions (7 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>36</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/mba/refer</code></td>
+        <td>addLeadMbaRefer</td>
+        <td>
+          Submit <span class="program">MBA</span> lead with referral tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>37</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/idm/leads/idm/refer</code></td>
+        <td>addLeadIdmRefer</td>
+        <td>
+          Submit <span class="program">IDM (Design)</span> lead with referral
+          tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>38</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/ihm/leads/ihm/refer</code></td>
+        <td>addLeadIhmRefer</td>
+        <td>
+          Submit <span class="program">IHM (Hotel Mgmt)</span> lead with
+          referral tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>39</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/bba/refer</code></td>
+        <td>addLeadBbaRefer</td>
+        <td>
+          Submit <span class="program">BBA</span> lead with referral tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>40</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isu/leads/btech/refer</code></td>
+        <td>addLeadBTechRefer</td>
+        <td>
+          Submit <span class="program">BTech</span> lead with referral tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>41</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isa/refer</code></td>
+        <td>addLeadISARefer</td>
+        <td>
+          Submit <span class="program">ISA</span> lead with referral tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>42</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/raipur/common</code></td>
+        <td>addLeadRaipurRefer</td>
+        <td>
+          Submit <span class="program">Raipur</span> lead with referral + UTM
+          parameter tracking
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>10. Common / Universal Endpoints (3 APIs)</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Controller Function</th>
+        <th>Use Case</th>
+        <th>Auth</th>
+      </tr>
+      <tr>
+        <td>43</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/isa/common</code></td>
+        <td>addLeadISA</td>
+        <td>
+          Submit lead for <span class="program">ISA common</span> — routes by
+          keyword to Axis, ICICI, Kotak, or Equitas programs
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>44</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/vadodara/common</code></td>
+        <td>addLeadVadodaraRefer</td>
+        <td>
+          Submit <span class="program">Vadodara</span> lead with referral
+          tracking
+        </td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>45</td>
+        <td><span class="method-post">POST</span></td>
+        <td><code>/v2/itm/lead/all</code></td>
+        <td>addLeadITM</td>
+        <td>
+          <span class="program">Universal endpoint</span> — routes leads by
+          vertical (Business School, Design Institute, Hotel Management, Health
+          Sciences, Engineering) and course selection
+        </td>
+        <td>No</td>
+      </tr>
+    </table>
+
+    <!-- ======================================================== -->
+    <h2>Summary by Vertical</h2>
+    <table>
+      <tr>
+        <th>Vertical</th>
+        <th>APIs</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td>Referral Management</td>
+        <td>2</td>
+        <td>Generate and retrieve referral codes</td>
+      </tr>
+      <tr>
+        <td>Engineering (ISU)</td>
+        <td>5</td>
+        <td>BTech CSE, M.Tech, MSc CS, Applied AI</td>
+      </tr>
+      <tr>
+        <td>Business School</td>
+        <td>4</td>
+        <td>BBA iConnect, MBA iConnect, MBA v2, BBA Intl. Hospitality</td>
+      </tr>
+      <tr>
+        <td>Design Institute (IDM)</td>
+        <td>6</td>
+        <td>VFX, Fashion, Interior, Visual Comm, UX, IDM Common</td>
+      </tr>
+      <tr>
+        <td>Hotel Management (IHM)</td>
+        <td>7</td>
+        <td>
+          IHM Common, Hospitality Studies, Patisserie, Culinary Arts, GHM, BBA
+          Hosp.
+        </td>
+      </tr>
+      <tr>
+        <td>Health Sciences (IHS)</td>
+        <td>4</td>
+        <td>MLT, Bachelor of Optometry, Master of Optometry, IHS Common</td>
+      </tr>
+      <tr>
+        <td>Industry-Specific Academy (ISA)</td>
+        <td>4</td>
+        <td>Kotak NextGen, Kotak SKY, ICICI PGPRM, Axis Sales Officer</td>
+      </tr>
+      <tr>
+        <td>Regional Campuses</td>
+        <td>4</td>
+        <td>VUG Integrated BTech, VUG Common, VUG BTech, Raipur University</td>
+      </tr>
+      <tr>
+        <td>Referral-Tracked Leads</td>
+        <td>7</td>
+        <td>
+          MBA, IDM, IHM, BBA, BTech, ISA, Raipur — all with referral tracking
+        </td>
+      </tr>
+      <tr>
+        <td>Common / Universal</td>
+        <td>3</td>
+        <td>ISA Common, Vadodara, Universal lead router</td>
+      </tr>
+      <tr style="background-color: #1a1a2e; color: #fff">
+        <td><strong>TOTAL</strong></td>
+        <td><strong>45</strong></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <div class="footer">
+      <p>
+        Generated from <strong>lu-node-api</strong> repository &nbsp;|&nbsp;
+        Routes: server.js (lines 225–271) &nbsp;|&nbsp; Controller:
+        controllers/itm.js &nbsp;|&nbsp; February 2026
+      </p>
+    </div>
+  </body>
+</html>
